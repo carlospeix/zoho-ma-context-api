@@ -1,10 +1,8 @@
 import streamlit as st
 import pandas as pd
 
-def render():
-    st.set_page_config(page_title="Zoho Widget Examples", layout="wide")
+def main():
     st.title("Zoho Widget Examples")
-
     # --- Customer Overview (Summary Cards) ---
     st.markdown("## 💼 Customer Overview")
     cols = st.columns(4)
@@ -89,3 +87,6 @@ def render():
     st.markdown("## ⚠️ Loading & Error States")
     st.info("🔄 Loading customer data...", icon="🔄")
     st.error("Error: Unable to fetch data from internal API. Please check your connection and try again.")
+
+if __name__ == "__main__":
+    main()

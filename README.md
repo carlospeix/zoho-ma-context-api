@@ -23,5 +23,17 @@ Run the Streamlit app:
 streamlit run src/app.py
 ```
 
+
+## Running Tests
+To run all tests:
+```bash
+python -m unittest discover -s tests
+```
+
+To run a specific test file:
+```bash
+python -m unittest tests/test_api.py
+```
+
 ## Add dependencies
 List them in `requirements.txt`.

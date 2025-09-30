@@ -1,8 +1,5 @@
 import streamlit as st
 
-def main():
+def render():
     st.title("Home Page")
     st.write("Welcome to the Streamlit multi-page app!")
-
-if __name__ == "__main__":
-    main()
