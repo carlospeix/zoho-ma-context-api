@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoho CRM Widget Layout Examples</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 20px;
+            background-color: #f8f9fa;
+        }
+
+        .widget-container {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .widget-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        /* Layout 1: Summary Cards */
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .summary-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #007bff;
+        }
+
+        .card-title {
+            font-weight: 600;
+            color: #495057;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .card-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .card-subtitle {
+            font-size: 12px;
+            color: #6c757d;
+            margin-top: 4px;
+        }
+
+        /* Layout 2: Data Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .data-table th {
+            background-color: #f8f9fa;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid #dee2e6;
+            color: #495057;
+        }
+
+        .data-table td {
+            padding: 12px;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .data-table tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        /* Layout 3: Timeline/Activity Feed */
+        .timeline {
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #dee2e6;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 20px;
+            padding-left: 30px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #007bff;
+            border: 2px solid white;
+            box-shadow: 0 0 0 2px #007bff;
+        }
+
+        .timeline-date {
+            font-size: 12px;
+            color: #6c757d;
+            margin-bottom: 4px;
+        }
+
+        .timeline-content {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+        }
+
+        /* Layout 4: Key-Value Pairs */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            padding: 10px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .info-label {
+            font-size: 12px;
+            color: #6c757d;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .info-value {
+            font-size: 14px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        /* Status indicators */
+        .status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status.active { background-color: #d4edda; color: #155724; }
+        .status.warning { background-color: #fff3cd; color: #856404; }
+        .status.inactive { background-color: #f8d7da; color: #721c24; }
+
+        /* Action buttons */
+        .action-buttons {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .btn-primary { background-color: #007bff; color: white; }
+        .btn-secondary { background-color: #6c757d; color: white; }
+        .btn-outline { background-color: white; color: #007bff; border: 1px solid #007bff; }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #6c757d;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="widget-container">
+    <div class="widget-title">💼 Customer Overview</div>
+    
+    <div class="summary-cards">
+        <div class="summary-card">
+            <div class="card-title">Account Value</div>
+            <div class="card-value">$45,230</div>
+            <div class="card-subtitle">Annual Contract Value</div>
+        </div>
+        <div class="summary-card">
+            <div class="card-title">Risk Score</div>
+            <div class="card-value" style="color: #28a745;">Low</div>
+            <div class="card-subtitle">Based on payment history</div>
+        </div>
+        <div class="summary-card">
+            <div class="card-title">Support Tier</div>
+            <div class="card-value">Premium</div>
+            <div class="card-subtitle">Response: 2 hours</div>
+        </div>
+        <div class="summary-card">
+            <div class="card-title">Last Contact</div>
+            <div class="card-value">3 days ago</div>
+            <div class="card-subtitle">Email - Product inquiry</div>
+        </div>
+    </div>
+</div>
+
+<div class="widget-container">
+    <div class="widget-title">🎫 Recent Support History</div>
+    
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Issue Type</th>
+                <th>Priority</th>
+                <th>Status</th>
+                <th>Resolution Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>2025-09-15</td>
+                <td>Technical Issue</td>
+                <td>High</td>
+                <td><span class="status active">Resolved</span></td>
+                <td>4.2 hours</td>
+            </tr>
+            <tr>
+                <td>2025-09-10</td>
+                <td>Billing Question</td>
+                <td>Medium</td>
+                <td><span class="status active">Resolved</span></td>
+                <td>1.8 hours</td>
+            </tr>
+            <tr>
+                <td>2025-09-05</td>
+                <td>Feature Request</td>
+                <td>Low</td>
+                <td><span class="status warning">In Progress</span></td>
+                <td>-</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="widget-container">
+    <div class="widget-title">📊 Account Information</div>
+    
+    <div class="info-grid">
+        <div class="info-item">
+            <div class="info-label">Account Manager</div>
+            <div class="info-value">Sarah Johnson</div>
+        </div>
+        <div class="info-item">
+            <div class="info-label">Implementation Date</div>
+            <div class="info-value">March 15, 2023</div>
+        </div>
+        <div class="info-item">
+            <div class="info-label">License Count</div>
+            <div class="info-value">125 users</div>
+        </div>
+        <div class="info-item">
+            <div class="info-label">Contract End Date</div>
+            <div class="info-value">March 15, 2026</div>
+        </div>
+        <div class="info-item">
+            <div class="info-label">Payment Method</div>
+            <div class="info-value">Auto-pay (Credit Card)</div>
+        </div>
+        <div class="info-item">
+            <div class="info-label">Renewal Probability</div>
+            <div class="info-value" style="color: #28a745;">95%</div>
+        </div>
+    </div>
+</div>
+
+<div class="widget-container">
+    <div class="widget-title">⏰ Recent Activity Timeline</div>
+    
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="timeline-date">September 16, 2025</div>
+            <div class="timeline-content">
+                <strong>Support ticket created</strong><br>
+                Customer reported login issues affecting 12 users
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-date">September 14, 2025</div>
+            <div class="timeline-content">
+                <strong>Payment processed</strong><br>
+                Monthly subscription payment of $2,450 completed
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-date">September 10, 2025</div>
+            <div class="timeline-content">
+                <strong>Feature usage spike</strong><br>
+                API calls increased by 150% - potential upgrade opportunity
+            </div>
+        </div>
+    </div>
+
+    <div class="action-buttons">
+        <button class="btn btn-primary">View Full History</button>
+        <button class="btn btn-outline">Export Report</button>
+        <button class="btn btn-secondary">Set Alert</button>
+    </div>
+</div>
+
+<div class="widget-container">
+    <div class="widget-title">⚠️ Loading & Error States</div>
+    
+    <div class="loading">
+        <div>🔄 Loading customer data...</div>
+    </div>
+    
+    <div class="error">
+        <strong>Error:</strong> Unable to fetch data from internal API. Please check your connection and try again.
+    </div>
+</div>
+
+<script>
+    // Example JavaScript for dynamic data loading
+    console.log('Zoho CRM Widget Examples Loaded');
+    
+    // Simulate loading states
+    function loadCustomerData() {
+        // This would integrate with your internal APIs
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve({
+                    accountValue: '$45,230',
+                    riskScore: 'Low',
+                    supportTier: 'Premium'
+                });
+            }, 2000);
+        });
+    }
+
+    // Example of how you might refresh data
+    function refreshWidget() {
+        const summaryCards = document.querySelector('.summary-cards');
+        summaryCards.innerHTML = '<div class="loading">Loading...</div>';
+        
+        loadCustomerData().then(data => {
+            // Update UI with fresh data
+            console.log('Data refreshed:', data);
+        });
+    }
+
+    // Set up periodic refresh (optional)
+    // setInterval(refreshWidget, 300000); // Refresh every 5 minutes
+</script>
+
+</body>
+</html>
